@@ -9,7 +9,7 @@ type HomeProps =
 export function Home(props: HomeProps)
 {
     return(
-        <header id='header'>
+        <header id='home'>
         <div className='intro'>
           <div className='overlay'>
           <Container >

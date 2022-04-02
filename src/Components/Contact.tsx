@@ -1,8 +1,9 @@
 import { Container, Row, Col,Form,Button} from 'react-bootstrap';
-import{ChangeEvent, useState} from "react";
+import{ChangeEvent, useState,useRef} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook,faTwitter,faYoutube } from "@fortawesome/free-brands-svg-icons"
 import {faMapMarker,faPhone,faEnvelope} from "@fortawesome/free-solid-svg-icons";
+import emailjs from '@emailjs/browser';
 
 const initialState = {
     name: '',
@@ -24,7 +25,21 @@ export function Contact(props: ContactProps)
         const { name, value } = event.target
         setFieldsState((prevState) => ({ ...prevState, [name]: value }))
       }
-      const clearState = () => setFieldsState({ ...initialState })// os tres pontinhos atualiza o valor corrente para os valor4s de inicial state
+
+
+    const clearState = () => setFieldsState({ ...initialState })// os tres pontinhos 
+                                                                //atualiza o valor corrente
+                                                                // para os valor4s de inicial state
+    
+    const handleSubmit = (e:any) => {
+      const form = useRef();
+      e.preventDefault()
+      console.log(name, email, message)
+      emailjs.
+      sendForm(
+        'YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', e.target, 'YOUR_USER_ID').
+        then((result) => {console.log(result.text); clearState()},
+        (error) => {console.log(error.text)})}
     return(
          
         <div>
@@ -40,7 +55,7 @@ export function Contact(props: ContactProps)
                     get back to you as soon as possible.
                   </p>
                 </div>
-                <Form>
+                <Form onSubmit={handleSubmit} id="myForm">
                    <Row>
                      <Col md={6}>
                      <Form.Group>
@@ -78,7 +93,7 @@ export function Contact(props: ContactProps)
                     <p className='help-block text-danger'></p>
                     </Form.Group>
                   <div id='success'></div>
-                  <Button as="input" type="submit" value="  Send Message" size="lg"/>{' '}
+                  <Button as="input" type="submit"  size="lg"/>{' '}
                  
                   </Form>
                 </Row>
