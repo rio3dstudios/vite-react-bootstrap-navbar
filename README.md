@@ -7,10 +7,10 @@ This project was bootstrapped with [npm create vite@latest].
 
 ```
 # clone the project
-git clone https://github.com/rio3dstudios/vite-react-bootstrap.git
+git clone https://github.com/rio3dstudios/vite-react-bootstrap-navbar.git
 
 # open the project directory
-cd vite-react-electron
+cd vite-react-navbar
 
 # install dependencies
 npm install
